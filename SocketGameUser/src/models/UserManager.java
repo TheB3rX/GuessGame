@@ -70,8 +70,7 @@ public class UserManager {
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 jsonList = reader.lines().collect(Collectors.joining("\n"));
                 if (jsonList!=null && !jsonList.equals("")){
-                    userInfo = gson.fromJson(jsonList, new TypeToken<ArrayList<UserInfo>>(){
-                    }.getType());
+                    userInfo = gson.fromJson(jsonList,UserInfo.class);
                     reader.close();
                     return true;
                 }

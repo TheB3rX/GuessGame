@@ -10,3 +10,5 @@ SocketGameUser/out/files
 .class
 *.class
 *.json
+SocketGame/assets/clients.json
+SocketGame/assets/clients.json
