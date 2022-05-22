@@ -1,7 +1,12 @@
-.idea
+.idea/
 .iml
 .json
 SocketGame/assets/clients.json
+SocketGameUser/assets/clients.json
+SocketGame/out/files
+SocketGame/out/production
+SocketGameUser/out/production
+SocketGameUser/out/files
 .class
 *.class
 *.json
