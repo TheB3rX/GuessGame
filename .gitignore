@@ -3,3 +3,5 @@
 .json
 SocketGame/assets/clients.json
 .class
+*.class
+*.json
