@@ -56,6 +56,7 @@ public class SplashApp extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.BLACK);
         setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
 

@@ -13,7 +13,6 @@ public class UserManager {
     private static final String PATH_FILE = "assets/userInfo.json";
     private static UserInfo userInfo = new UserInfo();
     private static Gson gson;
-    private static GsonBuilder builder;
 
     public static boolean createDirectory() {
         gson = new GsonBuilder().setPrettyPrinting().create();

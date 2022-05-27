@@ -1,16 +1,17 @@
 package controller;
 
 import models.ServerManager;
+import persistence.ClientManager;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class SocketHandler extends Thread {
     private Socket socket;
     private int number = 0;
-    private Controller controller;
 
     public SocketHandler(Socket socket) {
         this.socket = socket;
@@ -35,16 +36,21 @@ public class SocketHandler extends Thread {
                 //send true or false depending if is the same number
                 dos.writeBoolean(isEqual(goalNumber));
                 attempts++;
-//                System.out.println(isEqual(goalNumber) ? "Client guessed the number" : "Client tried to guess");
+//                sendList(socket);
             }
             dos.writeUTF(String.valueOf(attempts));
 //            System.out.println(socket.getInetAddress() + " got disconnected");
             //Send number of attempts and time to client to save it in database
-            new Controller().addUser(socket.getInetAddress().toString(),dis.readUTF(), String.valueOf(attempts)+" attempts");
+            new Controller().addUser(socket.getInetAddress().toString(), dis.readUTF(), String.valueOf(attempts) + " attempts");
             dos.writeBoolean(isEqual(goalNumber));
             socket.close();
         } catch (IOException e) {
         }
+    }
+
+    private void sendList(Socket socket) throws IOException {
+//        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+//        oos.writeObject(new ClientManager().getClients());
     }
 
 
