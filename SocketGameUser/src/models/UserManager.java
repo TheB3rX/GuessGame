@@ -13,6 +13,7 @@ public class UserManager {
     private static final String PATH_FILE = "assets/userInfo.json";
     private static UserInfo userInfo = new UserInfo();
     private static Gson gson;
+    private static GsonBuilder builder;
 
     public static boolean createDirectory() {
         gson = new GsonBuilder().setPrettyPrinting().create();
@@ -69,7 +70,8 @@ public class UserManager {
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 jsonList = reader.lines().collect(Collectors.joining("\n"));
                 if (jsonList!=null && !jsonList.equals("")){
-                    userInfo = gson.fromJson(jsonList,UserInfo.class);
+                    userInfo = gson.fromJson(jsonList, new TypeToken<ArrayList<UserInfo>>(){
+                    }.getType());
                     reader.close();
                     return true;
                 }

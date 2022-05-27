@@ -112,6 +112,7 @@ public class ClientManager {
     }
 
     public static ArrayList<Client> searchClient(String name) {
+        var file = new File(PATH_FILE);
         ArrayList<Client> searchQuery = new ArrayList<Client>();
         for (Client client : clients) {
             if (client.getIp().toLowerCase().contains(name)) {
@@ -125,11 +126,10 @@ public class ClientManager {
         }
         return null;
     }
-
-    //Get user list
-    public static ArrayList<Client> getClients() {
-        ArrayList<Client> searchQuery = new ArrayList<Client>();
-        return searchQuery;
+    public static void printClients() {
+        for (Client client : clients) {
+            System.out.println(client.getIp() + " " + client.getAttemptRecords() + " " + client.getTimeRecords());
+        }
     }
 }
 

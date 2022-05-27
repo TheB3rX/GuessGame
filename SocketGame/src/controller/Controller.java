@@ -41,9 +41,6 @@ public class Controller extends Thread {
         ServerManager uManager = new ServerManager(port, number);
     }
 
-    public void getList(){
-
-    }
     public void addUser(String ip,String time, String tries) {
         ClientManager.addClient(new Client(ip), time, tries);
 //        ClientManager.printClients();

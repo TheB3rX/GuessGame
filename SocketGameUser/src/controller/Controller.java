@@ -4,16 +4,17 @@ import models.UserInfo;
 import models.UserManager;
 import models.timeManager.Chronometer;
 import views.CoderAbout;
-import views.ShowRecords;
 import views.SplashApp;
 import views.UserGUI;
 
+import javax.xml.crypto.Data;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static models.UserManager.*;
@@ -44,7 +45,6 @@ public class Controller implements ActionListener {
             //Start the chronometer
             chrono.start();
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             boolean runnable = false;
             socket.setSoTimeout(300000);
             DataInputStream dis = new DataInputStream(socket.getInputStream());
@@ -58,6 +58,7 @@ public class Controller implements ActionListener {
             addUserAttempt(chrono.getFormattedTime(),dis.readUTF());
             //send time formatted to server
             dos.writeUTF(chrono.getFormattedTime());
+            userGUI.show(false);
             //Show Reconnect message
             if (userGUI.showReconnection()) {
                 startClient(ip, port);
@@ -73,8 +74,6 @@ public class Controller implements ActionListener {
             System.exit(0);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        } catch (Exception e){
-            System.out.println("e = " + e);
         }
     }
 
@@ -101,9 +100,6 @@ public class Controller implements ActionListener {
             if (actionEvent.getActionCommand().equals("about")) {
                 new CoderAbout();
             }
-//            if(actionEvent.getActionCommand().equals("history")){
-//                showRecords();
-//            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
@@ -115,12 +111,5 @@ public class Controller implements ActionListener {
         createDirectory();
         createFile();
         readList();
-    }
-
-    public void showRecords() throws IOException, ClassNotFoundException {
-        //Get client list from ObjectInputStream and show it on the screen
-        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-        ArrayList<UserInfo> list = (ArrayList<UserInfo>) ois.readObject();
-        new ShowRecords(list).addListInfo(list);
     }
 }
