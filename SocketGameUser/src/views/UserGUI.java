@@ -55,6 +55,13 @@ public class UserGUI extends JFrame {
         jMenuItem.addActionListener(listener);
         jMenuItem.setActionCommand("about");
         jMenu.add(jMenuItem);
+
+        jMenuItem = new JMenuItem("Historial de usuario");
+        jMenuItem.setMnemonic(KeyEvent.VK_A);
+        jMenuItem.getAccessibleContext().setAccessibleDescription("Historial");
+        jMenuItem.addActionListener(listener);
+        jMenuItem.setActionCommand("history");
+        jMenu.add(jMenuItem);
         jMenuBar.add(jMenu);
         add(jMenuBar);
 

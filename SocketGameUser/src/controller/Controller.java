@@ -4,6 +4,7 @@ import models.UserInfo;
 import models.UserManager;
 import models.timeManager.Chronometer;
 import views.CoderAbout;
+import views.HistoryInfo;
 import views.SplashApp;
 import views.UserGUI;
 
@@ -99,6 +100,9 @@ public class Controller implements ActionListener {
             }
             if (actionEvent.getActionCommand().equals("about")) {
                 new CoderAbout();
+            }
+            if (actionEvent.getActionCommand().equals("history")) {
+                new HistoryInfo();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

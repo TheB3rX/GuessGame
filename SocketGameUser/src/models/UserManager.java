@@ -62,23 +62,22 @@ public class UserManager {
             throw new RuntimeException(e);
         }
     }
-    public static boolean readList(){
+    public static boolean readList() {
         var file = new File(PATH_FILE);
-        try{
-            if (file.exists()){
+        try {
+            if (file.exists()) {
                 var jsonList = "";
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 jsonList = reader.lines().collect(Collectors.joining("\n"));
-                if (jsonList!=null && !jsonList.equals("")){
-                    userInfo = gson.fromJson(jsonList, new TypeToken<ArrayList<UserInfo>>(){
-                    }.getType());
+                if (jsonList != null && !jsonList.equals("")) {
+                    userInfo = gson.fromJson(jsonList, new UserInfo().getClass());
                     reader.close();
                     return true;
                 }
                 initList();
                 return false;
 
-            }else {
+            } else {
                 initList();
                 return false;
             }
